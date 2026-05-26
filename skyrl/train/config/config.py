@@ -644,6 +644,8 @@ class TrainerConfig(BaseConfig):
     project_name: str = "skyrl"
     run_name: str = "test_run"
     logger: str = "wandb"
+    tags: Optional[List[str]] = None
+    """Optional list of tags to apply to the W&B run. Has no effect on other backends."""
     dump_data_batch: bool = False
     dump_eval_results: bool = True
     rope_scaling: Optional[Dict[str, Any]] = None

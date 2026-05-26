@@ -159,6 +159,8 @@ class SFTConfig(BaseConfig):
     logger: str = "console"  # "console" or "wandb"
     project_name: str = "skyrl_sft"
     run_name: str = "skyrl_sft_run"
+    tags: Optional[List[str]] = None
+    """Optional list of tags to apply to the W&B run. Has no effect on other backends."""
     ckpt_path: str = ""  # empty string = no checkpointing
     ckpt_interval: int = 0
     max_ckpts_to_keep: int = -1
@@ -318,6 +320,7 @@ def build_skyrl_config_for_sft(sft_cfg: SFTConfig) -> SkyRLTrainConfig:
     cfg.trainer.logger = sft_cfg.logger
     cfg.trainer.project_name = sft_cfg.project_name
     cfg.trainer.run_name = sft_cfg.run_name
+    cfg.trainer.tags = sft_cfg.tags
     if sft_cfg.ckpt_path:
         cfg.trainer.ckpt_path = sft_cfg.ckpt_path
         cfg.trainer.ckpt_interval = sft_cfg.ckpt_interval

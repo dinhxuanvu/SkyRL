@@ -38,6 +38,7 @@ class Tracking:
         experiment_name,
         backends: Union[str, List[str]] = "console",
         config: Optional[Union[SkyRLTrainConfig, DictConfig]] = None,
+        tags: Optional[List[str]] = None,
     ):
         if isinstance(backends, str):
             backends = [backends]
@@ -49,7 +50,12 @@ class Tracking:
         if "wandb" in backends:
             import wandb
 
-            wandb.init(project=project_name, name=experiment_name, config=get_config_as_dict(config))
+            wandb.init(
+                project=project_name,
+                name=experiment_name,
+                config=get_config_as_dict(config),
+                tags=tags,
+            )
             self.logger["wandb"] = wandb
 
         if "mlflow" in backends:
